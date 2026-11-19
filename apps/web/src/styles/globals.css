@@ -1,0 +1,740 @@
+/* Tailwind v4 utilities for the React shell and future Mini App screens. */
+@import "tailwindcss";
+
+:root {
+  font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+  color: #122338;
+  background: linear-gradient(160deg, #f4f7fb, #d9e8ff);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+.shell {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.shell-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.shell-nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.shell-nav a {
+  color: #0d4a9a;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.page {
+  background: #ffffffcc;
+  border: 1px solid #c6d8f4;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.home-shell {
+  min-height: 100dvh;
+}
+
+.entry-page {
+  display: grid;
+  min-height: 100dvh;
+  place-items: center;
+  overflow: hidden;
+  padding: 0;
+  color: #f6fbff;
+  background: linear-gradient(145deg, #17191e, #07090d 58%, #111318);
+}
+
+.entry-phone {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 100dvh;
+  padding: 0;
+  isolation: isolate;
+  background: transparent;
+}
+
+.entry-phone__content {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  padding: clamp(2rem, 6vh, 3.6rem) clamp(1.3rem, 7vw, 3.8rem) clamp(2.2rem, 6vh, 4rem);
+  border-radius: 0;
+  container-type: inline-size;
+  background:
+    radial-gradient(ellipse at 50% 19%, rgb(15 91 148 / 24%) 0%, transparent 48%),
+    #021125;
+}
+
+.entry-phone__content::before {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: center / cover no-repeat url('/landing-bg.webp');
+  content: '';
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.entry-phone__content > * {
+  z-index: 1;
+}
+
+.entry-hero {
+  display: grid;
+  width: min(100%, 28rem);
+  min-height: clamp(8rem, 23vh, 12rem);
+  place-items: center;
+}
+
+.terms-content {
+  align-items: stretch;
+  overflow-y: auto;
+  padding-inline: clamp(1rem, 3.5vw, 1.5rem);
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+
+.terms-content::-webkit-scrollbar {
+  display: none;
+}
+
+.terms-hero {
+  display: grid;
+  justify-items: center;
+  gap: clamp(1rem, 3vh, 1.75rem);
+  padding: clamp(0.25rem, 1vh, 0.6rem) 0 clamp(1.5rem, 4vh, 2.5rem);
+}
+
+.terms-hero .entry-logo {
+  width: min(74%, 15.5rem);
+}
+
+.terms-hero h1 {
+  margin: 0;
+  color: #f6fbff;
+  font-size: clamp(1.05rem, 4.8cqw, 1.45rem);
+  letter-spacing: 0.07em;
+  text-align: center;
+}
+
+.terms-card {
+  width: 100%;
+  margin: 0 auto;
+  padding: clamp(1.1rem, 4.5vw, 1.6rem);
+  border: 1px solid rgb(105 198 239 / 56%);
+  border-radius: 1.25rem;
+  background: rgb(1 14 34 / 58%);
+  box-shadow: inset 0 1px rgb(255 255 255 / 8%);
+}
+
+.terms-card section + section {
+  margin-top: 1.25rem;
+}
+
+.terms-card h2 {
+  margin: 0 0 0.45rem;
+  color: #79d8ff;
+  font-size: clamp(0.77rem, 3.2cqw, 0.92rem);
+  letter-spacing: 0.07em;
+}
+
+.terms-card p {
+  margin: 0;
+  color: rgb(235 247 255 / 88%);
+  font-size: clamp(0.83rem, 3.6cqw, 1rem);
+  line-height: 1.5;
+}
+
+.entry-logo {
+  width: min(100%, 17.6rem);
+  aspect-ratio: 480 / 204;
+  overflow: hidden;
+  filter: drop-shadow(0 0 0.6rem rgb(42 174 240 / 38%));
+}
+
+.entry-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  animation: entry-logo-sprite 1.5s steps(1, end) infinite;
+}
+
+/* Верхняя половина спрайта — обычный логотип, нижняя — подсвеченный.
+   Одна секунда нормального кадра и полсекунды подсветки. */
+@keyframes entry-logo-sprite {
+  0%, 66.66% {
+    transform: translateY(0);
+  }
+
+  66.67%, 100% {
+    transform: translateY(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entry-logo img {
+    animation: none;
+  }
+}
+
+.entry-actions {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: min(82%, 25rem);
+  container-type: inline-size;
+  gap: clamp(0.9rem, 2.5vh, 1.3rem);
+  transform: translate(-50%, -50%);
+}
+
+.entry-action {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  gap: clamp(0.45rem, 2.2cqw, 0.9rem);
+  min-height: clamp(4.5rem, 10vh, 5.8rem);
+  padding: 0.5rem 0.8rem;
+  padding: 0.5rem clamp(0.7rem, 3cqw, 2rem);
+  cursor: pointer;
+  border: 1px solid rgb(152 230 255 / 80%);
+  border-radius: 1.25rem;
+  box-shadow: inset 0 1px rgb(255 255 255 / 23%), 0 0.6rem 1.4rem rgb(0 0 0 / 29%);
+  color: #f8fdff;
+  font-family: inherit;
+  font-size: 1rem;
+  font-size: clamp(0.78rem, 6cqw, 1.6rem);
+  font-weight: 800;
+  letter-spacing: 0.015em;
+  line-height: 1.1;
+  text-align: center;
+  white-space: nowrap;
+  transition: filter 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+}
+
+.entry-action__icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  width: clamp(1.2rem, 8cqw, 2rem);
+  height: clamp(1.2rem, 8cqw, 2rem);
+  flex: 0 0 auto;
+  fill: currentColor;
+}
+
+.entry-action > span {
+  min-width: 0;
+}
+
+.entry-action--guest {
+  background: linear-gradient(145deg, #115e47, #063021 52%, #021a14);
+  border-color: #20d997;
+}
+
+.entry-action--telegram {
+  background: linear-gradient(145deg, #12587e, #07304e 52%, #031c30);
+  border-color: #37bff8;
+}
+
+.entry-action:hover:not(:disabled) {
+  filter: brightness(1.14);
+  box-shadow: inset 0 1px rgb(255 255 255 / 31%), 0 0.75rem 1.6rem rgb(0 0 0 / 38%);
+  transform: translateY(-2px);
+}
+
+.entry-action--guest:hover:not(:disabled) {
+  box-shadow:
+    inset 0 1px rgb(255 255 255 / 31%),
+    0 0.75rem 1.6rem rgb(0 0 0 / 38%),
+    0 0 1.35rem rgb(32 217 151 / 30%);
+}
+
+.entry-action--telegram:hover:not(:disabled) {
+  box-shadow:
+    inset 0 1px rgb(255 255 255 / 31%),
+    0 0.75rem 1.6rem rgb(0 0 0 / 38%),
+    0 0 1.35rem rgb(55 191 248 / 30%);
+}
+
+.entry-action:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.entry-action:focus-visible,
+.entry-terms:focus-visible {
+  outline: 3px solid #f8e84d;
+  outline-offset: 4px;
+}
+
+.entry-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.entry-feedback {
+  position: absolute;
+  top: calc(50% + clamp(7rem, 15vh, 8rem));
+  left: 50%;
+  width: min(calc(100% - clamp(2.6rem, 14vw, 7.6rem)), 28rem);
+  min-height: 2.2rem;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.entry-hint,
+.entry-error {
+  margin: 1rem 0 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.entry-hint {
+  color: #a8dfff;
+}
+
+.entry-error {
+  color: #ffb5b5;
+}
+
+.entry-footer {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  text-align: center;
+}
+
+.entry-terms {
+  display: inline-block;
+  color: #71bfff;
+  font-size: clamp(0.68rem, 2.1vw, 0.82rem);
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-decoration: none;
+  text-shadow: none;
+  transition: color 150ms ease;
+}
+
+.entry-terms:hover {
+  color: #d7f2ff;
+}
+
+@media (min-width: 768px) and (hover: hover) and (pointer: fine) {
+  .entry-page {
+    padding: clamp(0.7rem, 2vw, 2.4rem);
+  }
+
+  .entry-phone {
+    width: auto;
+    min-height: 0;
+    height: min(92dvh, 920px);
+    aspect-ratio: 9 / 16;
+    padding: clamp(0.35rem, 0.7vw, 0.7rem);
+    border: 1px solid #41434a;
+    border-radius: clamp(1.6rem, 3vw, 3.1rem);
+    background: linear-gradient(145deg, #2a2b2f, #08090b 48%, #17181b);
+    box-shadow:
+      0 1.5rem 4rem rgb(0 0 0 / 48%),
+      inset 0 0 0 1px rgb(255 255 255 / 10%);
+  }
+
+  .entry-phone__content {
+    padding-top: clamp(2rem, 5vh, 3.5rem);
+  }
+
+  .entry-hero {
+    min-height: clamp(8rem, 21vh, 11rem);
+  }
+
+  .entry-phone__content {
+    border-radius: calc(clamp(1.6rem, 3vw, 3.1rem) - clamp(0.35rem, 0.7vw, 0.7rem));
+  }
+}
+
+.game-page {
+  width: 100dvw;
+  height: 100dvh;
+  overflow: hidden;
+  /* Фон вокруг фиксированного портретного холста Godot на широких экранах. */
+  background: linear-gradient(to bottom, #072846 0%, #061937 100%);
+  transition: background-color 0.2s ease;
+}
+
+.game-phone,
+.game-phone__screen {
+  width: 100%;
+  height: 100%;
+}
+
+.game-phone {
+  position: relative;
+}
+
+.game-phone__speaker {
+  display: none;
+}
+
+.game-phone__screen {
+  overflow: hidden;
+}
+
+/* В полноэкранном mobile/Telegram-виде свободные края не должны конкурировать
+   с тёмной подложкой MODE. Desktop phone-preview переопределяет это правило
+   ниже: его демонстрационный фон остаётся постоянным. */
+.game-page--mode-panel-open {
+  background: #0d0d0d;
+}
+
+.game-frame {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+  background: linear-gradient(to bottom, #072846 0%, #061937 100%);
+}
+
+/* На обычном desktop Shell становится демонстрационным корпусом телефона.
+   Внутри всегда находится тот же iframe и та же игра — отдельной desktop
+   версии Godot, API или bridge не существует. Telegram принудительно остаётся
+   полноэкранным даже на большом экране desktop-клиента Telegram. */
+@media (min-width: 768px) and (hover: hover) and (pointer: fine) {
+  .game-page:not(.game-page--telegram) {
+    display: grid;
+    place-items: center;
+    padding: clamp(0.7rem, 2vw, 2.4rem);
+    /* Тот же нейтральный фон, что у телефона на главной. MODE меняет
+       только пространство вокруг игрового холста на мобильных экранах. */
+    background: linear-gradient(145deg, #17191e, #07090d 58%, #111318);
+  }
+
+  .game-page:not(.game-page--telegram).game-page--mode-panel-open {
+    background: linear-gradient(145deg, #17191e, #07090d 58%, #111318);
+  }
+
+  .game-phone {
+    width: auto;
+    height: min(92dvh, 920px);
+    aspect-ratio: 9 / 16;
+    padding: clamp(0.35rem, 0.7vw, 0.7rem);
+    border: 1px solid #41434a;
+    border-radius: clamp(1.6rem, 3vw, 3.1rem);
+    background: linear-gradient(145deg, #2a2b2f, #08090b 48%, #17181b);
+    box-shadow:
+      0 1.5rem 4rem rgb(0 0 0 / 48%),
+      inset 0 0 0 1px rgb(255 255 255 / 10%);
+  }
+
+  .game-phone__screen {
+    height: 100%;
+    border-radius: calc(clamp(1.6rem, 3vw, 3.1rem) - clamp(0.35rem, 0.7vw, 0.7rem));
+    background: #061937;
+  }
+
+  .game-phone__speaker {
+    position: absolute;
+    z-index: 1;
+    top: clamp(0.35rem, 0.7vw, 0.7rem);
+    left: 50%;
+    display: block;
+    width: 30%;
+    height: clamp(0.18rem, 0.4vw, 0.3rem);
+    border-radius: 999px;
+    background: #070b12;
+    box-shadow: inset 0 1px rgb(255 255 255 / 10%);
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+}
+
+.slot777-lab {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid #c6d8f4;
+}
+
+.slot777-result,
+.slot777-error {
+  margin-top: 0.85rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #edf5ff;
+}
+
+.slot777-result p {
+  margin: 0.25rem 0;
+}
+
+.slot777-result h3 {
+  margin: 1rem 0 0.5rem;
+  font-size: 1rem;
+}
+
+.slot777-counts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.45rem;
+  margin: 0;
+}
+
+.slot777-counts div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.4rem 0.5rem;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.slot777-counts dt span {
+  color: #526c8c;
+}
+
+.slot777-counts dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.slot777-error {
+  color: #9d1d1d;
+  background: #fff0f0;
+}
+
+.dev-page {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.dev-hero {
+  padding: clamp(1.1rem, 3vw, 2rem);
+  border-radius: 12px;
+  color: #eff8ff;
+  background: linear-gradient(125deg, #06254a, #0c5590);
+}
+
+.dev-hero h2,
+.dev-panel h3 {
+  margin: 0.25rem 0 0.65rem;
+}
+
+.dev-hero p:last-child {
+  max-width: 48rem;
+  margin: 0;
+  color: #d5ebfb;
+}
+
+.dev-eyebrow {
+  margin: 0;
+  color: #2479c5;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.dev-hero .dev-eyebrow {
+  color: #81d5ff;
+}
+
+.dev-summary-grid,
+.dev-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0.8rem;
+}
+
+.dev-summary-grid article,
+.dev-panel {
+  padding: 1rem;
+  border: 1px solid #c6d8f4;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 8px 20px #0a32630d;
+}
+
+.dev-summary-grid span,
+.dev-simulation-result span,
+.dev-result-grid dt {
+  display: block;
+  color: #526c8c;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.dev-summary-grid strong {
+  display: block;
+  margin: 0.25rem 0;
+  color: #0d4a9a;
+  font-size: 1.55rem;
+}
+
+.dev-summary-grid small {
+  color: #526c8c;
+  line-height: 1.35;
+}
+
+.dev-panel-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.dev-badge {
+  flex: none;
+  padding: 0.35rem 0.5rem;
+  border-radius: 999px;
+  color: #08703a;
+  background: #e7f8ed;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+}
+
+.dev-table-scroll {
+  overflow-x: auto;
+}
+
+.dev-table {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.dev-table th,
+.dev-table td {
+  padding: 0.7rem;
+  border-bottom: 1px solid #dfebfa;
+}
+
+.dev-table th {
+  color: #526c8c;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+}
+
+.dev-table td {
+  font-variant-numeric: tabular-nums;
+}
+
+.dev-table code,
+.dev-note code {
+  color: #0d4a9a;
+  font-weight: 800;
+}
+
+.dev-loss-row {
+  color: #6d7b8d;
+  background: #f8fafc;
+}
+
+.dev-note,
+.dev-copy {
+  color: #526c8c;
+  line-height: 1.45;
+}
+
+.dev-note {
+  margin: 1rem 0 0;
+  font-size: 0.9rem;
+}
+
+.dev-copy {
+  margin: 0 0 1rem;
+}
+
+.dev-button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.dev-button {
+  min-height: 2.7rem;
+  padding: 0.6rem 0.9rem;
+  cursor: pointer;
+  border: 1px solid #0d4a9a;
+  border-radius: 8px;
+  color: #fff;
+  background: #0d4a9a;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.dev-button-secondary {
+  color: #0d4a9a;
+  background: #fff;
+}
+
+.dev-button:disabled {
+  cursor: wait;
+  opacity: 0.56;
+}
+
+.dev-result-grid,
+.dev-simulation-result {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.65rem;
+  margin: 1rem 0 0;
+}
+
+.dev-result-grid div,
+.dev-simulation-result div {
+  padding: 0.7rem;
+  border-radius: 8px;
+  background: #edf5ff;
+}
+
+.dev-result-grid dd,
+.dev-simulation-result strong {
+  display: block;
+  margin: 0.25rem 0 0;
+  color: #0d4a9a;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.dev-positive {
+  color: #08703a !important;
+}
+
+.dev-negative {
+  color: #aa2a2a !important;
+}
+
+.dev-error {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  color: #8d1717;
+  background: #fff0f0;
+}
+
+@media (max-width: 560px) {
+  .dev-panel-heading {
+    flex-direction: column;
+  }
+}

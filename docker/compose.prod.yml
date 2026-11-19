@@ -1,0 +1,173 @@
+name: crazy-cash
+
+services:
+  mysql:
+    image: mysql:9.7
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - mysql_prod_data:/var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-uroot', '-p${MYSQL_ROOT_PASSWORD}']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks: [backend]
+
+  # Optional local-only administration UI. It is excluded from the default
+  # stack and has no public Nginx route; reach it through an SSH tunnel.
+  phpmyadmin:
+    profiles: [pma]
+    image: phpmyadmin/phpmyadmin:5.2.3
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      TZ: ${TZ}
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      UPLOAD_LIMIT: ${PMA_UPLOAD_LIMIT:-32M}
+    ports:
+      - '127.0.0.1:${PMA_PORT:-38114}:80'
+    networks: [backend]
+
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.api
+    restart: unless-stopped
+    env_file:
+      - ../.env.prod
+    environment:
+      NODE_ENV: production
+      API_HOST: 0.0.0.0
+      API_PORT: 3000
+      DATABASE_URL: 'mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@mysql:3306/${MYSQL_DATABASE}'
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD-SHELL', 'wget -q -O /dev/null http://127.0.0.1:3000/health']
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    networks: [backend]
+
+  guest-cleanup:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.api
+    restart: unless-stopped
+    env_file:
+      - ../.env.prod
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: 'mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@mysql:3306/${MYSQL_DATABASE}'
+    depends_on:
+      api:
+        condition: service_healthy
+    command:
+      - /bin/sh
+      - -ec
+      - |
+        while true; do
+          node apps/api/dist/jobs/guest-cleanup.js
+          # Expired guests are harmless between runs, but hourly cleanup keeps
+          # the disposable-account tables compact without polling constantly.
+          sleep 3600
+        done
+    networks: [backend]
+
+  ton-deposit-watcher:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.api
+    restart: unless-stopped
+    env_file:
+      - ../.env.prod
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: 'mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@mysql:3306/${MYSQL_DATABASE}'
+    depends_on:
+      api:
+        condition: service_healthy
+    command:
+      - /bin/sh
+      - -ec
+      - |
+        while true; do
+          node apps/api/dist/jobs/ton-deposit-watcher.js || true
+          sleep "${TON_DEPOSIT_WATCHER_INTERVAL_SECONDS:-5}"
+        done
+    networks: [backend]
+
+  # This is the only persistent process allowed to read the payout mnemonic.
+  # It selects exactly one network and sleeps when that network's payout flag
+  # is disabled, so it does not emit a retry loop while intentionally inactive.
+  ton-withdrawal-worker:
+    # The protected host directory is root-owned (0700/0600). This isolated
+    # worker has the only read-only mount of that directory and must run as
+    # root solely to read the selected sender mnemonic.
+    user: "0:0"
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.api
+    restart: unless-stopped
+    env_file:
+      - ../.env.prod
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: 'mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@mysql:3306/${MYSQL_DATABASE}'
+    depends_on:
+      api:
+        condition: service_healthy
+    command:
+      - /bin/sh
+      - -ec
+      - |
+        if [ "$${TON_NETWORK}" = "testnet" ]; then
+          payout_enabled="$${TON_WITHDRAW_ENABLE_TESTNET:-0}"
+        else
+          payout_enabled="$${TON_WITHDRAW_ENABLE_MAINNET:-0}"
+        fi
+        while true; do
+          if [ "$$payout_enabled" = "1" ]; then
+            node apps/api/dist/jobs/ton-withdrawal-worker.js || true
+            sleep "${TON_WITHDRAW_WATCHER_INTERVAL_SECONDS:-5}"
+          else
+            sleep 3600
+          fi
+        done
+    volumes:
+      - ${TON_SECRETS_DIR}:/run/secrets:ro
+    networks: [backend]
+
+  web:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.web
+      args:
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL}
+        VITE_TG_BOT_NAME: ${VITE_TG_BOT_NAME}
+        VITE_TON_MANIFEST_URL: ${VITE_TON_MANIFEST_URL}
+        VITE_ENABLE_TONCONNECT: ${VITE_ENABLE_TONCONNECT:-0}
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - '127.0.0.1:20069:8080'
+    networks: [backend]
+
+networks:
+  backend:
+    name: crazy-cash-backend
+
+volumes:
+  mysql_prod_data:

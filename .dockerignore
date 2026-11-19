@@ -1,0 +1,13 @@
+.git
+.env
+.env.dev
+.env.prod
+.env.local
+node_modules
+**/node_modules
+.turbo
+**/.turbo
+**/.godot
+**/.DS_Store
+**/dist
+**/coverage

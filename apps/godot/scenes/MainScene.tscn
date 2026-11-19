@@ -1,0 +1,1564 @@
+[gd_scene format=3 uid="uid://by53jni3jlip1"]
+
+[ext_resource type="Texture2D" uid="uid://uhafor57pq4q" path="res://assets/backgrounds/dark_bg.png" id="1_ibiss"]
+[ext_resource type="Texture2D" uid="uid://brijcc210lbb3" path="res://assets/sprites/spins_anim.png" id="2_c6dvc"]
+[ext_resource type="Script" uid="uid://2mlkk0hbm4pv" path="res://scripts/game/slots.gd" id="2_pjux3"]
+[ext_resource type="Texture2D" uid="uid://cvuvgh4oey6lw" path="res://assets/sprites/numbers_anim.png" id="3_611at"]
+[ext_resource type="Shader" uid="uid://dhak3qfl0qvuu" path="res://assets/shaders/SlotNumbers.gdshader" id="3_xnxdc"]
+[ext_resource type="FontFile" uid="uid://o6tvsjqqy8c8" path="res://assets/fonts/CursedTimer.ttf" id="4_cfq0f"]
+[ext_resource type="Shader" uid="uid://dkha1igtx1w1w" path="res://assets/shaders/ProfileAvatar.gdshader" id="4_profile_avatar_shader"]
+[ext_resource type="Script" uid="uid://df0lomyb4fyiq" path="res://scripts/ui/running_text.gd" id="5_kp0ql"]
+[ext_resource type="Script" uid="uid://v6plhgee51fr" path="res://scripts/ui/buttons.gd" id="9_x537r"]
+[ext_resource type="Script" uid="uid://cbpdw2uotyvse" path="res://scripts/ui/win_flash.gd" id="10_winflash"]
+[ext_resource type="Script" uid="uid://cuipktsri1l5s" path="res://scripts/ui/win_counter.gd" id="11_wincounter"]
+[ext_resource type="AudioStream" uid="uid://jqt8ngd5ojre" path="res://assets/audio/big_win.wav" id="12_win_sound"]
+[ext_resource type="AudioStream" uid="uid://c5p8830yxsajf" path="res://assets/audio/big_cashout.wav" id="13_cashout_sound"]
+[ext_resource type="AudioStream" uid="uid://djbviomv7m0v3" path="res://assets/audio/spinning.wav" id="14_spinning_sound"]
+[ext_resource type="AudioStream" uid="uid://qcrxyffcxbj1" path="res://assets/audio/small_cashout.wav" id="15_small_cashout_sound"]
+[ext_resource type="AudioStream" uid="uid://khek5xv1nj8f" path="res://assets/audio/bet1.wav" id="16_bet1_sound"]
+[ext_resource type="AudioStream" uid="uid://c3qv62vsxynsw" path="res://assets/audio/small_win.wav" id="16_small_win_sound"]
+[ext_resource type="AudioStream" uid="uid://cvirorvgy71tp" path="res://assets/audio/bet2.wav" id="17_bet2_sound"]
+[ext_resource type="AudioStream" uid="uid://ctbku4dxl7uoh" path="res://assets/audio/bet3.wav" id="18_bet3_sound"]
+[ext_resource type="AudioStream" uid="uid://c5gu6w0wc7sxa" path="res://assets/audio/click.wav" id="19_click_sound"]
+[ext_resource type="AudioStream" uid="uid://247wktl2hk5l" path="res://assets/audio/credited.wav" id="20_credited_sound"]
+[ext_resource type="Texture2D" uid="uid://bpts0stur0bjl" path="res://assets/backgrounds/main_frame.webp" id="20_e65ta"]
+[ext_resource type="Texture2D" uid="uid://r4ww20q220tx" path="res://assets/sprites/logo_amim.webp" id="21_ep2w0"]
+[ext_resource type="Texture2D" uid="uid://dvicm85gejqog" path="res://assets/sprites/glowing_frame.png" id="23_fupde"]
+[ext_resource type="Texture2D" uid="uid://b0yucfaq2n8hm" path="res://assets/buttons/button_bet.webp" id="25_ep2w0"]
+[ext_resource type="Texture2D" uid="uid://dabo8egyrgsy7" path="res://assets/backgrounds/mode_panel.png" id="26_7wwop"]
+[ext_resource type="Script" uid="uid://c0fgpa10w6xam" path="res://scripts/ui/mode_panel.gd" id="26_jcw2p"]
+[ext_resource type="Texture2D" uid="uid://bcdvpdnh5j7w8" path="res://assets/buttons/button_bet_pressed.webp" id="26_x1s54"]
+[ext_resource type="Texture2D" uid="uid://4fyycv4so2ef" path="res://assets/buttons/button_play.webp" id="27_pou4m"]
+[ext_resource type="Texture2D" uid="uid://uy5tgektb383" path="res://assets/buttons/button_play_pressed.webp" id="28_48gc8"]
+[ext_resource type="Texture2D" uid="uid://7srwwwgprvmx" path="res://assets/buttons/button_cross.png" id="28_qavw1"]
+[ext_resource type="FontFile" uid="uid://bo6c85rbs8yos" path="res://assets/fonts/DS.ttf" id="29_l3o4o"]
+[ext_resource type="Texture2D" uid="uid://bjmmwaof06isb" path="res://assets/buttons/button_mode.webp" id="29_wu3oq"]
+[ext_resource type="Texture2D" uid="uid://buqn7hsxjnped" path="res://assets/other/coin_fun_icon.png" id="30_kwqb8"]
+[ext_resource type="Texture2D" uid="uid://bdxo32nqxva0d" path="res://assets/buttons/button_mode_pressed.webp" id="30_w2e6h"]
+[ext_resource type="Texture2D" uid="uid://xp3n5sd64ckj" path="res://assets/other/toggle_body.png" id="31_y15d6"]
+[ext_resource type="Texture2D" uid="uid://c6blbadokcy6m" path="res://assets/other/toggle_circle.png" id="32_l3o4o"]
+[ext_resource type="Texture2D" uid="uid://ctxiugknkt4jq" path="res://assets/other/user_ava_default.webp" id="34_ep2w0"]
+[ext_resource type="Texture2D" uid="uid://b5qx47w8vkeg2" path="res://assets/buttons/button_add_fun.png" id="34_kwqb8"]
+[ext_resource type="Texture2D" uid="uid://c5tttqv111wj" path="res://assets/buttons/button_topup_press.png" id="36_wsqty"]
+[ext_resource type="Texture2D" uid="uid://jvbak3667y51" path="res://assets/buttons/button_topup.png" id="36_xuwja"]
+[ext_resource type="Texture2D" uid="uid://cea4mirbenyio" path="res://assets/buttons/button_withdraw.png" id="37_oiest"]
+[ext_resource type="Texture2D" uid="uid://2j4k7rcxfjwp" path="res://assets/buttons/button_001.png" id="38_pwxld"]
+[ext_resource type="Texture2D" uid="uid://bk1iaqggoiwoc" path="res://assets/buttons/button_001_press.png" id="39_cw1g3"]
+[ext_resource type="Texture2D" uid="uid://bsma3j6uytim2" path="res://assets/buttons/button_withdraw_press.png" id="39_g8282"]
+[ext_resource type="Texture2D" uid="uid://se46n3liq8bh" path="res://assets/buttons/button_denom.png" id="40_7tuqu"]
+[ext_resource type="Texture2D" uid="uid://bpwf6of0s5lis" path="res://assets/buttons/button_01.png" id="40_yc0gu"]
+[ext_resource type="Texture2D" uid="uid://5ed77or6nyfa" path="res://assets/buttons/button_denom_press.png" id="41_e65ta"]
+[ext_resource type="Texture2D" uid="uid://cffjsjfe03lq7" path="res://assets/buttons/button_01_press.png" id="41_qnen4"]
+[ext_resource type="Texture2D" uid="uid://ctuh3vntsmi5c" path="res://assets/buttons/button_1.png" id="42_q5chl"]
+[ext_resource type="Texture2D" uid="uid://dqqoeb551jo72" path="res://assets/buttons/button_1_press.png" id="43_j2mks"]
+[ext_resource type="Texture2D" uid="uid://bw8vlxgkrbs3r" path="res://assets/buttons/button_10.png" id="44_5ha8j"]
+[ext_resource type="Texture2D" uid="uid://ch6lc3142ocgv" path="res://assets/buttons/button_10_press.png" id="45_xuwja"]
+[ext_resource type="Texture2D" uid="uid://dx4k3obfjyqom" path="res://assets/buttons/button_connect.png" id="46_cw1g3"]
+[ext_resource type="Texture2D" uid="uid://d37humy52bvgj" path="res://assets/buttons/button_play_again.png" id="47_yc0gu"]
+[ext_resource type="Script" uid="uid://cvf6x2vxlqbl2" path="res://scripts/ui/session_expired_alert.gd" id="48_session_expired_alert"]
+[ext_resource type="Texture2D" uid="uid://ygap4rwjxelp" path="res://assets/other/wallet_icon.webp" id="55_ep2w0"]
+[ext_resource type="Texture2D" uid="uid://c7ayn3v7t1rje" path="res://assets/other/spinner.webp" id="56_x1s54"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_25dfr"]
+shader = ExtResource("3_xnxdc")
+shader_parameter/glow_color = Color(1, 0.05, 0.08, 1)
+shader_parameter/glow_strength = 0.1999999955296
+shader_parameter/glow_radius_px = 90.0
+shader_parameter/bright_threshold = 0.58
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ygjfp"]
+atlas = ExtResource("2_c6dvc")
+region = Rect2(0, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1wiy7"]
+atlas = ExtResource("2_c6dvc")
+region = Rect2(163, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1u68"]
+atlas = ExtResource("2_c6dvc")
+region = Rect2(326, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x537r"]
+atlas = ExtResource("2_c6dvc")
+region = Rect2(489, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfq0f"]
+atlas = ExtResource("2_c6dvc")
+region = Rect2(652, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjux3"]
+atlas = ExtResource("2_c6dvc")
+region = Rect2(815, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3jky"]
+atlas = ExtResource("2_c6dvc")
+region = Rect2(978, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kp0ql"]
+atlas = ExtResource("2_c6dvc")
+region = Rect2(489, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08o8g"]
+atlas = ExtResource("2_c6dvc")
+region = Rect2(652, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cxu4"]
+atlas = ExtResource("2_c6dvc")
+region = Rect2(815, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xnxdc"]
+atlas = ExtResource("3_611at")
+region = Rect2(1467, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ehpd"]
+atlas = ExtResource("3_611at")
+region = Rect2(0, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wjpf"]
+atlas = ExtResource("3_611at")
+region = Rect2(163, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25dfr"]
+atlas = ExtResource("3_611at")
+region = Rect2(326, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjvyo"]
+atlas = ExtResource("3_611at")
+region = Rect2(489, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2phbr"]
+atlas = ExtResource("3_611at")
+region = Rect2(652, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mkg2b"]
+atlas = ExtResource("3_611at")
+region = Rect2(815, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ns3k"]
+atlas = ExtResource("3_611at")
+region = Rect2(978, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7pbh"]
+atlas = ExtResource("3_611at")
+region = Rect2(1141, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ye0jt"]
+atlas = ExtResource("3_611at")
+region = Rect2(1304, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wwop"]
+atlas = ExtResource("2_c6dvc")
+region = Rect2(0, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jcw2p"]
+atlas = ExtResource("2_c6dvc")
+region = Rect2(163, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qavw1"]
+atlas = ExtResource("2_c6dvc")
+region = Rect2(326, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7ifx"]
+atlas = ExtResource("2_c6dvc")
+region = Rect2(489, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3sjc"]
+atlas = ExtResource("2_c6dvc")
+region = Rect2(652, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fto0a"]
+atlas = ExtResource("2_c6dvc")
+region = Rect2(815, 0, 163, 289)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cw1g3"]
+atlas = ExtResource("2_c6dvc")
+region = Rect2(978, 0, 163, 289)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nhmms"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ygjfp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1wiy7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1u68")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x537r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfq0f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjux3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3jky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kp0ql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08o8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0cxu4")
+}],
+"loop": 1,
+"name": &"def_spinning",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xnxdc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ehpd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wjpf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25dfr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kjvyo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2phbr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkg2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ns3k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a7pbh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ye0jt")
+}],
+"loop": 1,
+"name": &"numbers",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wwop")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jcw2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qavw1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7ifx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3sjc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fto0a")
+}],
+"loop": 1,
+"name": &"play_spinning",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cw1g3")
+}],
+"loop": 1,
+"name": &"pre_spinning",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ep2w0"]
+atlas = ExtResource("21_ep2w0")
+region = Rect2(0, 0, 480, 204)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1s54"]
+atlas = ExtResource("21_ep2w0")
+region = Rect2(0, 204, 480, 204)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pou4m"]
+atlas = ExtResource("21_ep2w0")
+region = Rect2(0, 0, 480, 204)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48gc8"]
+atlas = ExtResource("21_ep2w0")
+region = Rect2(0, 204, 480, 204)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n5bk8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ep2w0")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_x1s54")
+}],
+"loop": 1,
+"name": &"default_animation",
+"speed": 0.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pou4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48gc8")
+}],
+"loop": 1,
+"name": &"win_animation",
+"speed": 8.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_profile_avatar"]
+shader = ExtResource("4_profile_avatar_shader")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nhmms"]
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+shadow_color = Color(0, 0, 0, 0.14509805)
+shadow_size = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n5bk8"]
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+shadow_color = Color(0, 0, 0, 0.14509805)
+shadow_size = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e8bjc"]
+bg_color = Color(0, 0.47951517, 0.76595795, 1)
+corner_radius_top_left = 80
+corner_radius_top_right = 80
+corner_radius_bottom_right = 80
+corner_radius_bottom_left = 80
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lxt3b"]
+bg_color = Color(0.30331182, 0.30331182, 0.30331182, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1mqi7"]
+bg_color = Color(0.14239405, 0.14239405, 0.14239405, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_input_focus"]
+bg_color = Color(0.14239405, 0.14239405, 0.14239405, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8hm8o"]
+bg_color = Color(0.0902121, 0.0902121, 0.0902121, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[node name="Game" type="Control" unique_id=1616768750]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -540.0
+offset_top = -960.0
+offset_right = -540.0
+offset_bottom = -960.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainPage" type="Control" parent="." unique_id=2019609755]
+anchors_preset = 0
+offset_right = 1080.0
+offset_bottom = 1920.0
+
+[node name="DarkBackground" type="Sprite2D" parent="MainPage" unique_id=784186950]
+position = Vector2(540, 673)
+texture = ExtResource("1_ibiss")
+
+[node name="Slots" type="Control" parent="MainPage" unique_id=1327267608]
+anchors_preset = 0
+offset_right = 1080.0
+offset_bottom = 991.0
+script = ExtResource("2_pjux3")
+
+[node name="Numbers" type="CanvasGroup" parent="MainPage/Slots" unique_id=266077478]
+material = SubResource("ShaderMaterial_25dfr")
+position = Vector2(0, 15)
+fit_margin = 200.0
+clear_margin = 200.0
+
+[node name="FirstNumber" type="AnimatedSprite2D" parent="MainPage/Slots/Numbers" unique_id=1155871213]
+position = Vector2(261, 460)
+sprite_frames = SubResource("SpriteFrames_nhmms")
+animation = &"play_spinning"
+autoplay = "def_spinning"
+
+[node name="SecondNumber" type="AnimatedSprite2D" parent="MainPage/Slots/Numbers" unique_id=1517799279]
+position = Vector2(540, 460)
+sprite_frames = SubResource("SpriteFrames_nhmms")
+animation = &"play_spinning"
+autoplay = "def_spinning"
+
+[node name="ThirdNumber" type="AnimatedSprite2D" parent="MainPage/Slots/Numbers" unique_id=169929028]
+position = Vector2(819, 460)
+sprite_frames = SubResource("SpriteFrames_nhmms")
+animation = &"play_spinning"
+autoplay = "def_spinning"
+
+[node name="RunningText" type="Control" parent="MainPage/Slots" unique_id=1218015575]
+clip_contents = true
+anchors_preset = 0
+offset_left = 120.0
+offset_top = 752.0
+offset_right = 958.0
+offset_bottom = 801.0
+script = ExtResource("5_kp0ql")
+
+[node name="Text" type="Label" parent="MainPage/Slots/RunningText" unique_id=1870389739]
+visible = false
+layout_mode = 0
+offset_right = 301.0
+offset_bottom = 61.0
+theme_override_colors/font_color = Color(1, 0.14999998, 0.14999998, 1)
+theme_override_constants/line_spacing = 3
+theme_override_fonts/font = ExtResource("4_cfq0f")
+theme_override_font_sizes/font_size = 60
+text = "FUN MODE"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="WinCounter" type="Control" parent="MainPage/Slots" unique_id=657320949]
+clip_contents = true
+anchors_preset = 0
+offset_left = 120.0
+offset_top = 752.0
+offset_right = 958.0
+offset_bottom = 801.0
+script = ExtResource("11_wincounter")
+
+[node name="Text" type="Label" parent="MainPage/Slots/WinCounter" unique_id=186104383]
+layout_mode = 0
+offset_right = 841.0
+offset_bottom = 61.0
+theme_override_colors/font_color = Color(1, 0.14999998, 0.14999998, 1)
+theme_override_constants/line_spacing = 3
+theme_override_fonts/font = ExtResource("4_cfq0f")
+theme_override_font_sizes/font_size = 60
+text = "WON 1000"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="BigWinSound" type="AudioStreamPlayer" parent="MainPage/Slots" unique_id=1065842586]
+stream = ExtResource("12_win_sound")
+
+[node name="SmallWinSound" type="AudioStreamPlayer" parent="MainPage/Slots" unique_id=1897112807]
+stream = ExtResource("16_small_win_sound")
+
+[node name="BigCashoutSound" type="AudioStreamPlayer" parent="MainPage/Slots" unique_id=741895686]
+stream = ExtResource("13_cashout_sound")
+
+[node name="SmallCashoutSound" type="AudioStreamPlayer" parent="MainPage/Slots" unique_id=2093624870]
+stream = ExtResource("15_small_cashout_sound")
+
+[node name="ReelSpinSound" type="AudioStreamPlayer" parent="MainPage/Slots" unique_id=1644395925]
+stream = ExtResource("14_spinning_sound")
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="MainPage/Slots" unique_id=332931933]
+stream = ExtResource("19_click_sound")
+
+[node name="CreditsGrantedSound" type="AudioStreamPlayer" parent="MainPage/Slots" unique_id=1922059980]
+stream = ExtResource("20_credited_sound")
+
+[node name="Bet10Sound" type="AudioStreamPlayer" parent="MainPage/Slots" unique_id=1072645925]
+stream = ExtResource("16_bet1_sound")
+
+[node name="Bet100Sound" type="AudioStreamPlayer" parent="MainPage/Slots" unique_id=911986018]
+stream = ExtResource("17_bet2_sound")
+
+[node name="Bet1000Sound" type="AudioStreamPlayer" parent="MainPage/Slots" unique_id=1129940389]
+stream = ExtResource("18_bet3_sound")
+
+[node name="BetText" type="Control" parent="MainPage/Slots" unique_id=1067277912]
+anchors_preset = 0
+
+[node name="Bet" type="Label" parent="MainPage/Slots/BetText" unique_id=2062448732]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 871.0
+offset_right = 205.0
+offset_bottom = 929.0
+theme_override_colors/font_color = Color(1, 0.94509804, 0.14901961, 1)
+theme_override_constants/line_spacing = 3
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 57
+text = "BET"
+vertical_alignment = 2
+
+[node name="BetValue" type="Label" parent="MainPage/Slots/BetText" unique_id=1166104977]
+layout_mode = 0
+offset_left = 233.0
+offset_top = 866.0
+offset_right = 490.0
+offset_bottom = 931.0
+theme_override_colors/font_color = Color(1, 0.94509804, 0.14901961, 1)
+theme_override_constants/line_spacing = 3
+theme_override_fonts/font = ExtResource("4_cfq0f")
+theme_override_font_sizes/font_size = 52
+text = "10"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="BalanceText" type="Control" parent="MainPage/Slots" unique_id=19965351]
+anchors_preset = 0
+
+[node name="Balance" type="Label" parent="MainPage/Slots/BalanceText" unique_id=21899957]
+layout_mode = 0
+offset_left = 588.0
+offset_top = 871.0
+offset_right = 672.0
+offset_bottom = 929.0
+theme_override_colors/font_color = Color(0.19215687, 1, 0.14901961, 1)
+theme_override_constants/line_spacing = 3
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 57
+text = "BAL"
+vertical_alignment = 2
+
+[node name="BalanceValue" type="Label" parent="MainPage/Slots/BalanceText" unique_id=560226828]
+layout_mode = 0
+offset_left = 695.0
+offset_top = 865.0
+offset_right = 960.0
+offset_bottom = 930.0
+theme_override_colors/font_color = Color(0.19215687, 1, 0.14901961, 1)
+theme_override_constants/line_spacing = 3
+theme_override_fonts/font = ExtResource("4_cfq0f")
+theme_override_font_sizes/font_size = 52
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Cabinet" type="Control" parent="MainPage" unique_id=659504255]
+anchors_preset = 0
+offset_right = 1080.0
+offset_bottom = 1920.0
+
+[node name="Dashboard" type="Sprite2D" parent="MainPage/Cabinet" unique_id=1045321996]
+position = Vector2(540, 960)
+texture = ExtResource("20_e65ta")
+
+[node name="Logo" type="AnimatedSprite2D" parent="MainPage/Cabinet/Dashboard" unique_id=1454126512]
+position = Vector2(1.9999995, -827)
+sprite_frames = SubResource("SpriteFrames_n5bk8")
+animation = &"default_animation"
+frame_progress = 0.34136632
+
+[node name="WinFlash" type="Control" parent="MainPage/Cabinet" unique_id=954729088]
+anchors_preset = 0
+script = ExtResource("10_winflash")
+
+[node name="0XX" type="Sprite2D" parent="MainPage/Cabinet/WinFlash" unique_id=372542649]
+visible = false
+position = Vector2(260, 1124)
+texture = ExtResource("23_fupde")
+
+[node name="7XX" type="Sprite2D" parent="MainPage/Cabinet/WinFlash" unique_id=1366235163]
+visible = false
+position = Vector2(260, 1228)
+texture = ExtResource("23_fupde")
+
+[node name="00X" type="Sprite2D" parent="MainPage/Cabinet/WinFlash" unique_id=18956918]
+visible = false
+position = Vector2(260, 1332)
+texture = ExtResource("23_fupde")
+
+[node name="55X" type="Sprite2D" parent="MainPage/Cabinet/WinFlash" unique_id=458573527]
+visible = false
+position = Vector2(260, 1436)
+texture = ExtResource("23_fupde")
+
+[node name="77X" type="Sprite2D" parent="MainPage/Cabinet/WinFlash" unique_id=279403963]
+visible = false
+position = Vector2(260, 1541)
+texture = ExtResource("23_fupde")
+
+[node name="000" type="Sprite2D" parent="MainPage/Cabinet/WinFlash" unique_id=341010587]
+visible = false
+position = Vector2(542, 1123)
+texture = ExtResource("23_fupde")
+
+[node name="111" type="Sprite2D" parent="MainPage/Cabinet/WinFlash" unique_id=1257830109]
+visible = false
+position = Vector2(542, 1228)
+texture = ExtResource("23_fupde")
+
+[node name="222" type="Sprite2D" parent="MainPage/Cabinet/WinFlash" unique_id=1936066354]
+visible = false
+position = Vector2(542, 1332)
+texture = ExtResource("23_fupde")
+
+[node name="444" type="Sprite2D" parent="MainPage/Cabinet/WinFlash" unique_id=1611630561]
+visible = false
+position = Vector2(542, 1437)
+texture = ExtResource("23_fupde")
+
+[node name="666" type="Sprite2D" parent="MainPage/Cabinet/WinFlash" unique_id=661485537]
+visible = false
+position = Vector2(542, 1541)
+texture = ExtResource("23_fupde")
+
+[node name="333" type="Sprite2D" parent="MainPage/Cabinet/WinFlash" unique_id=103091231]
+visible = false
+position = Vector2(824, 1124)
+texture = ExtResource("23_fupde")
+
+[node name="888" type="Sprite2D" parent="MainPage/Cabinet/WinFlash" unique_id=141303191]
+visible = false
+position = Vector2(824, 1228)
+texture = ExtResource("23_fupde")
+
+[node name="999" type="Sprite2D" parent="MainPage/Cabinet/WinFlash" unique_id=1633819121]
+visible = false
+position = Vector2(824, 1332)
+texture = ExtResource("23_fupde")
+
+[node name="555" type="Sprite2D" parent="MainPage/Cabinet/WinFlash" unique_id=678859346]
+visible = false
+position = Vector2(825, 1437)
+texture = ExtResource("23_fupde")
+
+[node name="777" type="Sprite2D" parent="MainPage/Cabinet/WinFlash" unique_id=1183306976]
+visible = false
+position = Vector2(825, 1542)
+texture = ExtResource("23_fupde")
+
+[node name="Buttons" type="Control" parent="MainPage/Cabinet" unique_id=771856142]
+anchors_preset = 0
+offset_left = 97.0
+offset_top = 1674.0
+offset_right = 992.0
+offset_bottom = 1826.0
+script = ExtResource("9_x537r")
+
+[node name="BetButton" type="TextureButton" parent="MainPage/Cabinet/Buttons" unique_id=1051951443]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 9.0
+offset_right = 258.0
+offset_bottom = 140.0
+texture_normal = ExtResource("25_ep2w0")
+texture_pressed = ExtResource("26_x1s54")
+
+[node name="PlayButton" type="TextureButton" parent="MainPage/Cabinet/Buttons" unique_id=2132796333]
+layout_mode = 0
+offset_left = 284.0
+offset_top = 3.0
+offset_right = 611.0
+offset_bottom = 153.0
+texture_normal = ExtResource("27_pou4m")
+texture_pressed = ExtResource("28_48gc8")
+
+[node name="ModeButton" type="TextureButton" parent="MainPage/Cabinet/Buttons" unique_id=2073416558]
+layout_mode = 0
+offset_left = 637.0
+offset_top = 10.0
+offset_right = 893.0
+offset_bottom = 141.0
+texture_normal = ExtResource("29_wu3oq")
+texture_pressed = ExtResource("30_w2e6h")
+
+[node name="ModePanel" type="Control" parent="." unique_id=254952035]
+anchors_preset = 0
+offset_right = 1080.0
+offset_bottom = 1920.0
+script = ExtResource("26_jcw2p")
+
+[node name="Backdrop" type="ColorRect" parent="ModePanel" unique_id=1585732062]
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 1920.0
+color = Color(0, 0, 0, 0.5882353)
+
+[node name="Page" type="Control" parent="ModePanel" unique_id=1488576199]
+anchors_preset = 0
+offset_right = 1080.0
+offset_bottom = 1920.0
+
+[node name="Background" type="TextureRect" parent="ModePanel/Page" unique_id=1014880343]
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 1920.0
+texture = ExtResource("26_7wwop")
+
+[node name="Header" type="Control" parent="ModePanel/Page" unique_id=882211494]
+anchors_preset = 0
+offset_right = 1080.0
+offset_bottom = 235.0
+
+[node name="Balance" type="Control" parent="ModePanel/Page/Header" unique_id=1090644534]
+anchors_preset = 0
+offset_left = 107.0
+offset_top = 60.0
+offset_right = 545.0
+offset_bottom = 183.0
+
+[node name="ProfileIcon" type="TextureRect" parent="ModePanel/Page/Header/Balance" unique_id=278619008]
+material = SubResource("ShaderMaterial_profile_avatar")
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 120.0
+texture = ExtResource("34_ep2w0")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="BalanceTitle" type="Label" parent="ModePanel/Page/Header/Balance" unique_id=1030040496]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 5.0
+offset_right = 322.0
+offset_bottom = 44.0
+theme_override_colors/font_color = Color(0.71, 0.71, 0.71, 1)
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 34
+text = "FUN BALANCE"
+
+[node name="CurrencyIcon" type="TextureRect" parent="ModePanel/Page/Header/Balance" unique_id=406802094]
+layout_mode = 0
+offset_left = 134.0
+offset_top = 64.0
+offset_right = 189.0
+offset_bottom = 119.0
+texture = ExtResource("30_kwqb8")
+
+[node name="BalanceValue" type="Label" parent="ModePanel/Page/Header/Balance" unique_id=867808025]
+layout_mode = 0
+offset_left = 203.0
+offset_top = 60.0
+offset_right = 409.0
+offset_bottom = 121.0
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 60
+text = "---"
+
+[node name="ModeSwitch" type="Control" parent="ModePanel/Page/Header" unique_id=222752348]
+anchors_preset = 0
+offset_left = 626.0
+offset_top = 50.0
+offset_right = 948.0
+offset_bottom = 200.0
+
+[node name="FunLabel" type="Label" parent="ModePanel/Page/Header/ModeSwitch" unique_id=1871083097]
+layout_mode = 0
+offset_left = 79.0
+offset_top = 76.0
+offset_right = 263.0
+offset_bottom = 127.0
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 50
+text = "FREE MODE"
+
+[node name="TonLabel" type="Label" parent="ModePanel/Page/Header/ModeSwitch" unique_id=398507200]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 24.0
+offset_right = 285.0
+offset_bottom = 75.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.5372549)
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 50
+text = "GRAM MODE"
+
+[node name="Switch" type="Control" parent="ModePanel/Page/Header/ModeSwitch" unique_id=592968528]
+anchors_preset = 0
+offset_left = 2.0
+offset_top = 127.0
+offset_right = 106.0
+offset_bottom = 183.0
+rotation = -1.5707964
+
+[node name="Track" type="TextureRect" parent="ModePanel/Page/Header/ModeSwitch/Switch" unique_id=1183247666]
+layout_mode = 0
+offset_right = 104.0
+offset_bottom = 56.0
+texture = ExtResource("31_y15d6")
+
+[node name="Toggle" type="TextureRect" parent="ModePanel/Page/Header/ModeSwitch/Switch" unique_id=581018593]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 10.0
+offset_right = 47.0
+offset_bottom = 46.0
+texture = ExtResource("32_l3o4o")
+
+[node name="HitArea" type="TextureButton" parent="ModePanel/Page/Header/ModeSwitch/Switch" unique_id=1392368836]
+layout_mode = 0
+offset_right = 104.0
+offset_bottom = 56.0
+
+[node name="CloseButton" type="TextureButton" parent="ModePanel/Page/Header" unique_id=1901108023]
+layout_mode = 0
+offset_left = 952.0
+offset_right = 1079.0
+offset_bottom = 128.0
+
+[node name="TextureRect" type="TextureRect" parent="ModePanel/Page/Header/CloseButton" unique_id=1682150247]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 65.0
+offset_right = 70.0
+offset_bottom = 100.0
+mouse_filter = 2
+texture = ExtResource("28_qavw1")
+
+[node name="FunContent" type="Control" parent="ModePanel/Page" unique_id=1697645286]
+visible = false
+anchors_preset = 0
+offset_top = 235.0
+offset_right = 1080.0
+offset_bottom = 1919.0
+
+[node name="Title" type="Label" parent="ModePanel/Page/FunContent" unique_id=269623746]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 70.0
+offset_right = 734.0
+offset_bottom = 161.0
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 90
+text = "FREE MODE"
+
+[node name="AddCreditsButton" type="TextureButton" parent="ModePanel/Page/FunContent" unique_id=592892967]
+layout_mode = 0
+offset_left = 361.0
+offset_top = 255.0
+offset_right = 733.0
+offset_bottom = 360.0
+texture_normal = ExtResource("34_kwqb8")
+
+[node name="Description" type="Label" parent="ModePanel/Page/FunContent" unique_id=555695913]
+modulate = Color(1, 1, 1, 0.5372549)
+layout_mode = 0
+offset_left = 148.0
+offset_top = 457.0
+offset_right = 941.0
+offset_bottom = 562.0
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 50
+text = "You can claim 1000 FUN credits only
+when your balance is below 100 FUN."
+horizontal_alignment = 1
+
+[node name="StatusBanner" type="Control" parent="ModePanel/Page/FunContent" unique_id=185174852]
+anchors_preset = 0
+offset_left = 115.0
+offset_top = 47.0
+offset_right = 965.0
+offset_bottom = 197.0
+
+[node name="SuccessBanner" type="Panel" parent="ModePanel/Page/FunContent/StatusBanner" unique_id=543882491]
+visible = false
+modulate = Color(0.07058824, 0.3764706, 0.08627451, 1)
+layout_mode = 0
+offset_left = -4.0
+offset_right = 846.0
+offset_bottom = 150.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nhmms")
+
+[node name="ErrorBanner" type="Panel" parent="ModePanel/Page/FunContent/StatusBanner" unique_id=419551700]
+visible = false
+modulate = Color(0.5137255, 0.08627451, 0.0627451, 1)
+layout_mode = 0
+offset_right = 850.0
+offset_bottom = 150.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_n5bk8")
+
+[node name="SuccessText" type="Label" parent="ModePanel/Page/FunContent/StatusBanner" unique_id=171235588]
+visible = false
+layout_mode = 0
+offset_left = 5.0
+offset_top = 51.0
+offset_right = 845.0
+offset_bottom = 102.0
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 50
+text = "successfully credited!"
+horizontal_alignment = 1
+
+[node name="ErrorText" type="Label" parent="ModePanel/Page/FunContent/StatusBanner" unique_id=800125673]
+visible = false
+layout_mode = 0
+offset_left = 5.0
+offset_top = 51.0
+offset_right = 845.0
+offset_bottom = 102.0
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 50
+text = "Must be under 100 credits"
+horizontal_alignment = 1
+
+[node name="TonContent" type="Control" parent="ModePanel/Page" unique_id=207956331]
+anchors_preset = 0
+offset_top = 235.0
+offset_right = 1080.0
+offset_bottom = 1919.0
+
+[node name="TonModeTitle" type="Label" parent="ModePanel/Page/TonContent" unique_id=2129963621]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 73.0
+offset_right = 734.0
+offset_bottom = 164.0
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 90
+text = "GRAM MODE"
+
+[node name="MenuButtons" type="Control" parent="ModePanel/Page/TonContent" unique_id=454449862]
+anchors_preset = 0
+offset_left = 107.0
+offset_top = 219.0
+offset_right = 955.0
+offset_bottom = 315.0
+
+[node name="DenomButton" type="TextureButton" parent="ModePanel/Page/TonContent/MenuButtons" unique_id=178954973]
+layout_mode = 0
+offset_left = 588.0
+offset_right = 847.0
+offset_bottom = 90.0
+texture_normal = ExtResource("40_7tuqu")
+texture_pressed = ExtResource("41_e65ta")
+
+[node name="WithdrawButton" type="TextureButton" parent="ModePanel/Page/TonContent/MenuButtons" unique_id=656429658]
+layout_mode = 0
+offset_left = 303.0
+offset_right = 562.0
+offset_bottom = 90.0
+texture_normal = ExtResource("37_oiest")
+texture_pressed = ExtResource("39_g8282")
+
+[node name="TopupButton" type="TextureButton" parent="ModePanel/Page/TonContent/MenuButtons" unique_id=2082497785]
+layout_mode = 0
+offset_left = 15.0
+offset_right = 274.0
+offset_bottom = 90.0
+texture_normal = ExtResource("36_xuwja")
+texture_pressed = ExtResource("36_wsqty")
+
+[node name="WalletConnectButton" type="Control" parent="ModePanel/Page/TonContent" unique_id=1001708160]
+anchors_preset = 0
+offset_left = 326.0
+offset_top = 372.0
+offset_right = 767.0
+offset_bottom = 457.0
+
+[node name="Panel" type="Panel" parent="ModePanel/Page/TonContent/WalletConnectButton" unique_id=2080883803]
+layout_mode = 0
+offset_left = -15.0
+offset_top = 1.0
+offset_right = 447.0
+offset_bottom = 80.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_e8bjc")
+
+[node name="ButtonValue" type="Label" parent="ModePanel/Page/TonContent/WalletConnectButton" unique_id=396532217]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 19.0
+offset_right = 429.0
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(18.892157, 18.892157, 18.892157, 1)
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 45
+text = "CONNECT WALLET <-I"
+horizontal_alignment = 1
+
+[node name="DenomBox" type="Control" parent="ModePanel/Page/TonContent" unique_id=804589056]
+visible = false
+anchors_preset = 0
+offset_left = 2.0
+offset_top = 476.0
+offset_right = 1078.0
+offset_bottom = 1406.0
+
+[node name="YourBalance" type="Label" parent="ModePanel/Page/TonContent/DenomBox" unique_id=1790077946]
+modulate = Color(0.5324996, 0.5324996, 0.5324996, 1)
+layout_mode = 0
+offset_left = 402.0
+offset_top = 36.0
+offset_right = 684.0
+offset_bottom = 72.0
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 35
+text = "Your game balance:"
+
+[node name="CurrentValue" type="Label" parent="ModePanel/Page/TonContent/DenomBox" unique_id=118378632]
+layout_mode = 0
+offset_left = 218.0
+offset_top = 101.0
+offset_right = 876.0
+offset_bottom = 156.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 55
+text = "0.12 GRAM = 1200 CRED"
+horizontal_alignment = 1
+
+[node name="DenomButtons" type="Control" parent="ModePanel/Page/TonContent/DenomBox" unique_id=1820776166]
+anchors_preset = 0
+offset_left = 127.0
+offset_top = 213.0
+offset_right = 947.0
+offset_bottom = 498.0
+
+[node name="Denomination001" type="TextureButton" parent="ModePanel/Page/TonContent/DenomBox/DenomButtons" unique_id=2044470288]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 373.0
+offset_bottom = 105.0
+texture_normal = ExtResource("38_pwxld")
+texture_pressed = ExtResource("39_cw1g3")
+
+[node name="Denomination01" type="TextureButton" parent="ModePanel/Page/TonContent/DenomBox/DenomButtons" unique_id=1819337912]
+layout_mode = 0
+offset_left = 448.0
+offset_right = 820.0
+offset_bottom = 105.0
+texture_normal = ExtResource("40_yc0gu")
+texture_pressed = ExtResource("41_qnen4")
+
+[node name="Denomination1" type="TextureButton" parent="ModePanel/Page/TonContent/DenomBox/DenomButtons" unique_id=1764662921]
+layout_mode = 0
+offset_top = 179.0
+offset_right = 372.0
+offset_bottom = 284.0
+texture_normal = ExtResource("42_q5chl")
+texture_pressed = ExtResource("43_j2mks")
+
+[node name="Denomination10" type="TextureButton" parent="ModePanel/Page/TonContent/DenomBox/DenomButtons" unique_id=228302956]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 179.0
+offset_right = 820.0
+offset_bottom = 284.0
+texture_normal = ExtResource("44_5ha8j")
+texture_pressed = ExtResource("45_xuwja")
+
+[node name="InfoText" type="Label" parent="ModePanel/Page/TonContent/DenomBox/DenomButtons" unique_id=53225606]
+modulate = Color(1, 1, 1, 0.5372549)
+layout_mode = 0
+offset_left = -42.0
+offset_top = 410.0
+offset_right = 870.0
+offset_bottom = 623.0
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 50
+text = "Minimum bet: 0.01 TON, equal to 10 credits.
+When you change the denomination, your
+ available balance is converted and
+rounded down to the nearest 10 credits."
+horizontal_alignment = 1
+
+[node name="WithdrawBox" type="Control" parent="ModePanel/Page/TonContent" unique_id=1385722613]
+visible = false
+anchors_preset = 0
+offset_left = 113.0
+offset_top = 481.0
+offset_right = 951.0
+offset_bottom = 1053.0
+
+[node name="InputBox" type="Control" parent="ModePanel/Page/TonContent/WithdrawBox" unique_id=563667733]
+anchors_preset = 0
+offset_right = 871.0
+offset_bottom = 524.0
+
+[node name="AvailableWithdraw" type="Control" parent="ModePanel/Page/TonContent/WithdrawBox/InputBox" unique_id=1103967859]
+anchors_preset = 0
+offset_left = 191.0
+offset_top = 20.0
+offset_right = 938.0
+offset_bottom = 89.0
+
+[node name="AvailableTitle" type="Label" parent="ModePanel/Page/TonContent/WithdrawBox/InputBox/AvailableWithdraw" unique_id=392957023]
+modulate = Color(0.5324996, 0.5324996, 0.5324996, 1)
+layout_mode = 0
+offset_left = 2.0
+offset_right = 244.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(0.8076375, 0.8076375, 0.8076375, 1)
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 55
+text = "AVAILABLE:"
+horizontal_alignment = 1
+
+[node name="AvailableValue" type="Label" parent="ModePanel/Page/TonContent/WithdrawBox/InputBox/AvailableWithdraw" unique_id=141314818]
+modulate = Color(0.5324996, 0.5324996, 0.5324996, 1)
+layout_mode = 0
+offset_left = 253.0
+offset_top = 1.0
+offset_right = 650.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(8.572303, 8.572303, 8.572303, 1)
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 55
+text = "12.23 GRAM"
+
+[node name="AllAmountButton" type="Button" parent="ModePanel/Page/TonContent/WithdrawBox/InputBox" unique_id=1486577127]
+layout_mode = 0
+offset_left = 335.0
+offset_top = 93.0
+offset_right = 521.0
+offset_bottom = 153.0
+theme_override_colors/font_color = Color(0.04063674, 0.04063674, 0.04063674, 1)
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_lxt3b")
+text = "ALL"
+
+[node name="LineEdit" type="LineEdit" parent="ModePanel/Page/TonContent/WithdrawBox/InputBox" unique_id=727735160]
+layout_mode = 0
+offset_left = 287.0
+offset_top = 188.0
+offset_right = 567.0
+offset_bottom = 284.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.875, 0.875, 0.875, 0.6)
+theme_override_colors/caret_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_1mqi7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_input_focus")
+placeholder_text = "Enter amount"
+alignment = 1
+max_length = 12
+
+[node name="SubmitButton" type="TextureButton" parent="ModePanel/Page/TonContent/WithdrawBox/InputBox" unique_id=1115198762]
+layout_mode = 0
+offset_left = 295.0
+offset_top = 308.0
+offset_right = 554.0
+offset_bottom = 398.0
+texture_normal = ExtResource("37_oiest")
+
+[node name="BottomText" type="Label" parent="ModePanel/Page/TonContent/WithdrawBox/InputBox" unique_id=365843740]
+modulate = Color(0.5324996, 0.5324996, 0.5324996, 1)
+layout_mode = 0
+offset_left = 132.0
+offset_top = 453.0
+offset_right = 737.0
+offset_bottom = 499.0
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 45
+text = "MINIMUM WITHDRAW AMOUNT 0.1 GRAM"
+
+[node name="WithdrawSpinner" type="Control" parent="ModePanel/Page/TonContent/WithdrawBox" unique_id=1698107436]
+visible = false
+anchors_preset = 0
+offset_left = 111.0
+offset_top = 12.0
+offset_right = 740.0
+offset_bottom = 464.0
+
+[node name="Spinner" type="TextureRect" parent="ModePanel/Page/TonContent/WithdrawBox/WithdrawSpinner" unique_id=525409323]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 33.0
+offset_right = 447.0
+offset_bottom = 291.0
+pivot_offset = Vector2(129, 129)
+texture = ExtResource("56_x1s54")
+
+[node name="AnimText" type="Label" parent="ModePanel/Page/TonContent/WithdrawBox/WithdrawSpinner" unique_id=1821963946]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 348.0
+offset_right = 598.0
+offset_bottom = 403.0
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 55
+text = "Processing withdrawal..."
+
+[node name="TopupBox" type="Control" parent="ModePanel/Page/TonContent" unique_id=213196590]
+anchors_preset = 0
+offset_left = 94.0
+offset_top = 485.0
+offset_right = 978.0
+offset_bottom = 1557.0
+
+[node name="WalletBalance" type="Control" parent="ModePanel/Page/TonContent/TopupBox" unique_id=1647371222]
+anchors_preset = 0
+offset_left = 280.0
+offset_top = 19.0
+offset_right = 737.0
+offset_bottom = 117.0
+
+[node name="Title" type="Label" parent="ModePanel/Page/TonContent/TopupBox/WalletBalance" unique_id=1132470254]
+modulate = Color(0.5555056, 0.5555056, 0.5555056, 1)
+layout_mode = 0
+offset_left = 78.0
+offset_top = -3.0
+offset_right = 263.0
+offset_bottom = 26.0
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 28
+text = "WALLET BALANCE"
+
+[node name="TonIcon" type="TextureRect" parent="ModePanel/Page/TonContent/TopupBox/WalletBalance" unique_id=1103805850]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 12.0
+offset_right = 62.0
+offset_bottom = 75.0
+texture = ExtResource("55_ep2w0")
+
+[node name="BalanceValue" type="Label" parent="ModePanel/Page/TonContent/TopupBox/WalletBalance" unique_id=908880963]
+modulate = Color(0.5324996, 0.5324996, 0.5324996, 1)
+layout_mode = 0
+offset_left = 76.0
+offset_top = 23.0
+offset_right = 444.0
+offset_bottom = 85.0
+theme_override_colors/font_color = Color(8.572303, 8.572303, 8.572303, 1)
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 60
+text = "0.00 GRAM"
+
+[node name="TopupInput" type="Control" parent="ModePanel/Page/TonContent/TopupBox" unique_id=398994067]
+anchors_preset = 0
+offset_top = 124.0
+offset_right = 890.0
+offset_bottom = 592.0
+
+[node name="AmountButtons" type="Control" parent="ModePanel/Page/TonContent/TopupBox/TopupInput" unique_id=1375360244]
+anchors_preset = 0
+offset_top = 3.0
+offset_right = 906.0
+offset_bottom = 207.0
+
+[node name="Amount01Button" type="Button" parent="ModePanel/Page/TonContent/TopupBox/TopupInput/AmountButtons" unique_id=296212341]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 20.0
+offset_right = 220.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0.04063674, 0.04063674, 0.04063674, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_lxt3b")
+text = "0.1"
+
+[node name="Amount05Button" type="Button" parent="ModePanel/Page/TonContent/TopupBox/TopupInput/AmountButtons" unique_id=367022780]
+layout_mode = 0
+offset_left = 251.0
+offset_top = 20.0
+offset_right = 437.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0.04063674, 0.04063674, 0.04063674, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_lxt3b")
+text = "0.5"
+
+[node name="Amount1Button" type="Button" parent="ModePanel/Page/TonContent/TopupBox/TopupInput/AmountButtons" unique_id=1592566619]
+layout_mode = 0
+offset_left = 465.0
+offset_top = 20.0
+offset_right = 651.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0.04063674, 0.04063674, 0.04063674, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_lxt3b")
+text = "1"
+
+[node name="Amount2Button" type="Button" parent="ModePanel/Page/TonContent/TopupBox/TopupInput/AmountButtons" unique_id=948954701]
+layout_mode = 0
+offset_left = 682.0
+offset_top = 20.0
+offset_right = 868.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0.04063674, 0.04063674, 0.04063674, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_lxt3b")
+text = "2"
+
+[node name="Amount5Button" type="Button" parent="ModePanel/Page/TonContent/TopupBox/TopupInput/AmountButtons" unique_id=185890566]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 116.0
+offset_right = 220.0
+offset_bottom = 176.0
+theme_override_colors/font_color = Color(0.04063674, 0.04063674, 0.04063674, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_lxt3b")
+text = "5"
+
+[node name="Amount10Button" type="Button" parent="ModePanel/Page/TonContent/TopupBox/TopupInput/AmountButtons" unique_id=1784868211]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 116.0
+offset_right = 436.0
+offset_bottom = 176.0
+theme_override_colors/font_color = Color(0.04063674, 0.04063674, 0.04063674, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_lxt3b")
+text = "10"
+
+[node name="Amount50Button" type="Button" parent="ModePanel/Page/TonContent/TopupBox/TopupInput/AmountButtons" unique_id=1268707761]
+layout_mode = 0
+offset_left = 466.0
+offset_top = 116.0
+offset_right = 652.0
+offset_bottom = 176.0
+theme_override_colors/font_color = Color(0.04063674, 0.04063674, 0.04063674, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_lxt3b")
+text = "50"
+
+[node name="Amount100Button" type="Button" parent="ModePanel/Page/TonContent/TopupBox/TopupInput/AmountButtons" unique_id=2100238046]
+layout_mode = 0
+offset_left = 682.0
+offset_top = 116.0
+offset_right = 868.0
+offset_bottom = 176.0
+theme_override_colors/font_color = Color(0.04063674, 0.04063674, 0.04063674, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_lxt3b")
+text = "100"
+
+[node name="LineEdit" type="LineEdit" parent="ModePanel/Page/TonContent/TopupBox/TopupInput" unique_id=1357469318]
+layout_mode = 0
+offset_left = 306.0
+offset_top = 220.0
+offset_right = 586.0
+offset_bottom = 316.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.875, 0.875, 0.875, 0.6)
+theme_override_colors/caret_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_1mqi7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_input_focus")
+placeholder_text = "Enter amount"
+alignment = 1
+max_length = 12
+
+[node name="SubmitButton" type="TextureButton" parent="ModePanel/Page/TonContent/TopupBox/TopupInput" unique_id=513559961]
+layout_mode = 0
+offset_left = 314.0
+offset_top = 348.0
+offset_right = 573.0
+offset_bottom = 438.0
+texture_normal = ExtResource("36_xuwja")
+
+[node name="BottomText" type="Label" parent="ModePanel/Page/TonContent/TopupBox/TopupInput" unique_id=524700909]
+modulate = Color(0.5324996, 0.5324996, 0.5324996, 1)
+layout_mode = 0
+offset_left = 26.0
+offset_top = 500.0
+offset_right = 878.0
+offset_bottom = 764.0
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 45
+text = "MINIMUM TOP-UP AMOUNT 0.1 GRAM
+
+By topping up your balance, you agree to
+the Terms and Conditions. Any gameplay
+losses cannot be reversed or refunded."
+horizontal_alignment = 1
+
+[node name="DepositSpinner" type="Control" parent="ModePanel/Page/TonContent/TopupBox" unique_id=1166825430]
+visible = false
+anchors_preset = 0
+offset_left = 130.0
+offset_top = 128.0
+offset_right = 762.0
+offset_bottom = 608.0
+
+[node name="Spinner" type="TextureRect" parent="ModePanel/Page/TonContent/TopupBox/DepositSpinner" unique_id=316499388]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 33.0
+offset_right = 447.0
+offset_bottom = 291.0
+pivot_offset = Vector2(129, 129)
+texture = ExtResource("56_x1s54")
+
+[node name="AnimText" type="Label" parent="ModePanel/Page/TonContent/TopupBox/DepositSpinner" unique_id=169057197]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 334.0
+offset_right = 562.0
+offset_bottom = 389.0
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 55
+text = "PAYMENT PROCESSING..."
+
+[node name="StatusBanner" type="Control" parent="ModePanel/Page/TonContent" unique_id=1644854143]
+anchors_preset = 0
+offset_left = 120.0
+offset_top = 36.0
+offset_right = 968.0
+offset_bottom = 186.0
+
+[node name="SuccessBanner" type="Panel" parent="ModePanel/Page/TonContent/StatusBanner" unique_id=656793379]
+visible = false
+modulate = Color(0.07058824, 0.3764706, 0.08627451, 1)
+layout_mode = 0
+offset_right = 850.0
+offset_bottom = 150.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nhmms")
+
+[node name="ErrorBanner" type="Panel" parent="ModePanel/Page/TonContent/StatusBanner" unique_id=1389756708]
+visible = false
+modulate = Color(0.5137255, 0.08627451, 0.0627451, 1)
+layout_mode = 0
+offset_right = 850.0
+offset_bottom = 150.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_n5bk8")
+
+[node name="StatusText" type="Label" parent="ModePanel/Page/TonContent/StatusBanner" unique_id=881573429]
+visible = false
+layout_mode = 0
+offset_left = 68.0
+offset_top = 50.0
+offset_right = 777.0
+offset_bottom = 101.0
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 50
+text = "STATUS TEXT"
+horizontal_alignment = 1
+
+[node name="Footer" type="Control" parent="ModePanel/Page" unique_id=1268919643]
+anchors_preset = 0
+offset_left = 93.0
+offset_top = 1794.0
+offset_right = 997.0
+offset_bottom = 1890.0
+
+[node name="SupportLink" type="LinkButton" parent="ModePanel/Page/Footer" unique_id=365832745]
+modulate = Color(0.5324996, 0.5324996, 0.5324996, 1)
+layout_mode = 0
+offset_left = 304.0
+offset_top = 48.0
+offset_right = 614.0
+offset_bottom = 89.0
+theme_override_colors/font_color = Color(0.5324996, 0.5324996, 0.5324996, 1)
+theme_override_colors/font_pressed_color = Color(0.8076375, 0.8076375, 0.8076375, 1)
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 35
+text = "Terms and Conditions"
+underline = 2
+uri = "https://YOUR_PUBLIC_URL/terms"
+
+[node name="Alert" type="Control" parent="ModePanel" unique_id=1071877449]
+visible = false
+anchors_preset = 0
+offset_right = 1081.0
+offset_bottom = 1921.0
+
+[node name="Backdrop" type="ColorRect" parent="ModePanel/Alert" unique_id=997703066]
+modulate = Color(0, 0, 0, 0.78431374)
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 1920.0
+
+[node name="ConnectModal" type="Panel" parent="ModePanel/Alert" unique_id=320705632]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 692.0
+offset_right = 985.0
+offset_bottom = 1148.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8hm8o")
+
+[node name="CloseButton" type="TextureButton" parent="ModePanel/Alert/ConnectModal" unique_id=1129574936]
+layout_mode = 0
+offset_left = 789.0
+offset_top = 11.0
+offset_right = 870.0
+offset_bottom = 89.0
+
+[node name="TextureButton" type="TextureRect" parent="ModePanel/Alert/ConnectModal/CloseButton" unique_id=1354866029]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 22.0
+offset_right = 60.0
+offset_bottom = 57.0
+mouse_filter = 2
+texture = ExtResource("28_qavw1")
+
+[node name="Label" type="Label" parent="ModePanel/Alert/ConnectModal" unique_id=1517661982]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 137.0
+offset_right = 802.0
+offset_bottom = 191.0
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 53
+text = "Connect your GRAM wallet first."
+
+[node name="TextureButton" type="TextureButton" parent="ModePanel/Alert/ConnectModal" unique_id=727286669]
+layout_mode = 0
+offset_left = 253.0
+offset_top = 264.0
+offset_right = 625.0
+offset_bottom = 369.0
+texture_normal = ExtResource("46_cw1g3")
+
+[node name="AlertSessionExpired" type="Control" parent="." unique_id=1504362544]
+visible = false
+anchors_preset = 0
+offset_right = 1081.0
+offset_bottom = 1921.0
+script = ExtResource("48_session_expired_alert")
+
+[node name="Backdrop" type="ColorRect" parent="AlertSessionExpired" unique_id=1635621802]
+modulate = Color(0, 0, 0, 0.78431374)
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 1920.0
+
+[node name="PlayAgainModal" type="Panel" parent="AlertSessionExpired" unique_id=1453538782]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 692.0
+offset_right = 985.0
+offset_bottom = 1148.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8hm8o")
+
+[node name="Label" type="Label" parent="AlertSessionExpired/PlayAgainModal" unique_id=684289670]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 141.0
+offset_right = 773.0
+offset_bottom = 195.0
+theme_override_fonts/font = ExtResource("29_l3o4o")
+theme_override_font_sizes/font_size = 53
+text = "YOUR GUEST SESSION HAS ENDED."
+
+[node name="TextureButton" type="TextureButton" parent="AlertSessionExpired/PlayAgainModal" unique_id=816480077]
+layout_mode = 0
+offset_left = 253.0
+offset_top = 266.0
+offset_right = 625.0
+offset_bottom = 371.0
+texture_normal = ExtResource("47_yc0gu")
