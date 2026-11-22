@@ -16,11 +16,11 @@ function formatPercentFromBasisPoints(value: number, digits = 2) {
 }
 
 function formatNumber(value: number) {
-  return new Intl.NumberFormat('en-US').format(value);
+  return new Intl.NumberFormat('ru-RU').format(value);
 }
 
 function ruleTitle(rule: string) {
-  return rule === 'no_win' ? 'NO WIN' : rule;
+  return rule === 'no_win' ? 'БЕЗ ВЫИГРЫША' : rule;
 }
 
 function expectedRtpContribution(weight: number, multiplier: number) {
@@ -44,7 +44,7 @@ export function DevPage() {
         if (isCurrent) setTheory(result);
       })
       .catch(() => {
-        if (isCurrent) setError('Could not load the game mathematics from the API.');
+        if (isCurrent) setError('Не удалось загрузить игровую математику из API.');
       })
       .finally(() => {
         if (isCurrent) setIsLoadingTheory(false);
@@ -66,6 +66,13 @@ export function DevPage() {
     ) ?? 0,
     [theory],
   );
+  const rulesByMultiplier = useMemo(
+    () =>
+      [...(theory?.rules ?? [])].sort(
+        (left, right) => left.multiplier - right.multiplier || left.rule.localeCompare(right.rule),
+      ),
+    [theory],
+  );
 
   async function testSpin() {
     if (isSpinning) return;
@@ -75,7 +82,7 @@ export function DevPage() {
     try {
       setLastSpin(await getSlot777Spin());
     } catch {
-      setError('Could not request a test spin from the API.');
+      setError('Не удалось запросить тестовый спин из API.');
     } finally {
       setIsSpinning(false);
     }
@@ -89,7 +96,7 @@ export function DevPage() {
     try {
       setSimulation(await getSlot777Simulation(spins));
     } catch {
-      setError('Could not run the RTP simulation.');
+      setError('Не удалось запустить симуляцию RTP.');
     } finally {
       setIsSimulating(false);
     }
@@ -102,62 +109,59 @@ export function DevPage() {
   return (
     <main className="dev-page page">
       <section className="dev-hero" aria-labelledby="dev-title">
-        <p className="dev-eyebrow">CRAZY CASH · GAME MATH</p>
-        <h2 id="dev-title">RTP and payout demonstration</h2>
-        <p>
-          This page reads the current server configuration. Probabilities, result
-          selection and simulations come from the API; the browser only displays them.
-        </p>
+        <p className="dev-eyebrow">CRAZY CASH · МАТЕМАТИКА ИГРЫ</p>
+        <h2 id="dev-title">RTP лаборатория</h2>
+        <p>Страница использует текущую серверную конфигурацию.</p>
       </section>
 
       {error ? <p className="dev-error" role="alert">{error}</p> : null}
 
-      <section className="dev-summary-grid" aria-label="Theoretical RTP summary">
+      <section className="dev-summary-grid" aria-label="Сводка теоретического RTP">
         <article>
-          <span>THEORETICAL RTP</span>
+          <span>ТЕОРЕТИЧЕСКИЙ RTP</span>
           <strong>{theory ? formatPercentFromBasisPoints(theory.targetRtpBasisPoints) : '—'}</strong>
-          <small>Expected return per 100 credits wagered.</small>
+          <small>Ожидаемый возврат на каждые 100 поставленных кредитов.</small>
         </article>
         <article>
-          <span>HOUSE EDGE</span>
+          <span>ПРЕИМУЩЕСТВО ИГРЫ</span>
           <strong>{theory ? formatPercentFromBasisPoints(10_000 - theory.targetRtpBasisPoints) : '—'}</strong>
-          <small>The complementary expected casino margin.</small>
+          <small>Обратная величина ожидаемой маржи игры.</small>
         </article>
         <article>
-          <span>WEIGHT TICKETS</span>
+          <span>БИЛЕТЫ ВЕСОВ</span>
           <strong>{totalWeight ? formatNumber(totalWeight) : '—'}</strong>
-          <small>Every spin draws one cryptographically random ticket.</small>
+          <small>Каждый спин выбирает один криптографически случайный билет.</small>
         </article>
         <article>
-          <span>CALCULATED RTP</span>
+          <span>РАССЧИТАННЫЙ RTP</span>
           <strong>{theory ? `${calculatedRtp.toFixed(3)}%` : '—'}</strong>
-          <small>Sum of probability × multiplier for every rule.</small>
+          <small>Сумма вероятность × множитель для каждого правила.</small>
         </article>
       </section>
 
       <section className="dev-panel" aria-labelledby="payout-title">
         <div className="dev-panel-heading">
           <div>
-            <p className="dev-eyebrow">SERVER PAYTABLE</p>
-            <h3 id="payout-title">Combinations and weights</h3>
+            <p className="dev-eyebrow">ТАБЛИЦА ВЫПЛАТ СЕРВЕРА</p>
+            <h3 id="payout-title">Комбинации и веса</h3>
           </div>
-          <span className="dev-badge">{isLoadingTheory ? 'LOADING' : 'LIVE API DATA'}</span>
+          <span className="dev-badge">{isLoadingTheory ? 'ЗАГРУЗКА' : 'АКТУАЛЬНЫЕ ДАННЫЕ API'}</span>
         </div>
 
         <div className="dev-table-scroll">
           <table className="dev-table">
             <thead>
               <tr>
-                <th>Rule</th>
-                <th>Multiplier</th>
-                <th>Weight</th>
-                <th>Probability</th>
-                <th>Combinations</th>
-                <th>RTP contribution</th>
+                <th>Правило</th>
+                <th>Множитель</th>
+                <th>Вес</th>
+                <th>Вероятность</th>
+                <th>Комбинации</th>
+                <th>Вклад в RTP</th>
               </tr>
             </thead>
             <tbody>
-              {theory?.rules.map((rule) => (
+              {rulesByMultiplier.map((rule) => (
                 <tr key={rule.rule} className={rule.multiplier === 0 ? 'dev-loss-row' : undefined}>
                   <td><code>{ruleTitle(rule.rule)}</code></td>
                   <td>{rule.multiplier ? `×${rule.multiplier}` : '—'}</td>
@@ -172,33 +176,31 @@ export function DevPage() {
         </div>
 
         <p className="dev-note">
-          Overlapping patterns resolve to the highest available multiplier: for example,
-          <code> 777 </code> pays ×200 rather than ×10 or ×2; <code>555</code> pays ×100.
+          Пересекающиеся паттерны используют наибольший доступный множитель: например,
+          <code> 777 </code> выплачивает ×200 вместо ×10 или ×2; <code>555</code> — ×100.
         </p>
       </section>
 
       <section className="dev-tools-grid">
         <article className="dev-panel" aria-labelledby="spin-test-title">
-          <p className="dev-eyebrow">RANDOMNESS CHECK</p>
-          <h3 id="spin-test-title">Single test spin</h3>
-          <p className="dev-copy">Requests one non-persistent outcome. It does not change any account balance.</p>
+          <p className="dev-eyebrow">ПРОВЕРКА СЛУЧАЙНОСТИ</p>
+          <h3 id="spin-test-title">Одиночный тестовый спин</h3>
           <button className="dev-button" type="button" onClick={() => void testSpin()} disabled={isSpinning}>
-            {isSpinning ? 'SPINNING…' : 'TEST SPIN'}
+            {isSpinning ? 'ВРАЩЕНИЕ…' : 'ТЕСТОВЫЙ СПИН'}
           </button>
 
           {lastSpin ? (
             <dl className="dev-result-grid">
-              <div><dt>COMBINATION</dt><dd>{lastSpin.combination}</dd></div>
-              <div><dt>RULE</dt><dd>{ruleTitle(lastSpin.rule)}</dd></div>
-              <div><dt>MULTIPLIER</dt><dd>{lastSpin.multiplier ? `×${lastSpin.multiplier}` : 'NO WIN'}</dd></div>
+              <div><dt>КОМБИНАЦИЯ</dt><dd>{lastSpin.combination}</dd></div>
+              <div><dt>ПРАВИЛО</dt><dd>{ruleTitle(lastSpin.rule)}</dd></div>
+              <div><dt>МНОЖИТЕЛЬ</dt><dd>{lastSpin.multiplier ? `×${lastSpin.multiplier}` : 'БЕЗ ВЫИГРЫША'}</dd></div>
             </dl>
           ) : null}
         </article>
 
         <article className="dev-panel" aria-labelledby="simulation-title">
-          <p className="dev-eyebrow">MONTE CARLO CHECK</p>
-          <h3 id="simulation-title">RTP simulation</h3>
-          <p className="dev-copy">A simulated result will vary around theoretical RTP. It never uses player funds.</p>
+          <p className="dev-eyebrow">ПРОВЕРКА МОНТЕ-КАРЛО</p>
+          <h3 id="simulation-title">Симуляция RTP</h3>
           <div className="dev-button-row">
             {SIMULATION_PRESETS.map((spins) => (
               <button
@@ -208,7 +210,7 @@ export function DevPage() {
                 onClick={() => void runSimulation(spins)}
                 disabled={isSimulating}
               >
-                {isSimulating ? 'RUNNING…' : formatNumber(spins)}
+                {isSimulating ? 'РАСЧЁТ…' : formatNumber(spins)}
               </button>
             ))}
           </div>
@@ -216,17 +218,17 @@ export function DevPage() {
           {simulation ? (
             <div className="dev-simulation-result">
               <div>
-                <span>SIMULATED RTP</span>
+                <span>СИМУЛИРОВАННЫЙ RTP</span>
                 <strong>{formatPercentFromBasisPoints(simulation.rtpBasisPoints)}</strong>
               </div>
               <div>
-                <span>DIFFERENCE</span>
+                <span>ОТКЛОНЕНИЕ</span>
                 <strong className={simulationDelta !== null && simulationDelta < 0 ? 'dev-negative' : 'dev-positive'}>
                   {simulationDelta === null ? '—' : `${simulationDelta >= 0 ? '+' : ''}${formatPercentFromBasisPoints(simulationDelta)}`}
                 </strong>
               </div>
               <div>
-                <span>SPINS</span>
+                <span>СПИНЫ</span>
                 <strong>{formatNumber(simulation.spins)}</strong>
               </div>
             </div>

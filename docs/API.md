@@ -97,6 +97,11 @@ lost response only.
 | `GET /crazy-cash/config` | Modes, allowed bets, REAL denominations and RTP rules. |
 | `GET /crazy-cash/theory`, `GET /crazy-cash/simulate?spins=N` | Read-only diagnostics. |
 
+The current game weights target a theoretical RTP of `98.600%`. Exact
+three-of-a-kind combinations use descending probabilities: lower multipliers
+are more frequent than higher multipliers. The `/config` and `/theory`
+responses are the authoritative published values.
+
 ### `POST /crazy-cash/fun-credits`
 
 ```json

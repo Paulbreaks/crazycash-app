@@ -17,6 +17,26 @@ test('rejects TON deposit amounts below 0.1 GRAM', async () => {
   assert.throws(() => parseDepositAmount('0.01'), InvalidDepositAmountError);
 });
 
+test('uses decreasing exact-win weights while preserving the configured RTP', async () => {
+  const {
+    SLOT777_TARGET_RTP_BASIS_POINTS,
+    SLOT777_WEIGHT_TOTAL,
+    getSlot777RuleSummary,
+    getSlot777TheoreticalRtpBasisPoints,
+  } = await import('./modules/slot777/engine.js');
+  const rules = getSlot777RuleSummary();
+  const exactWins = rules
+    .filter((rule) => /^\d{3}$/.test(rule.rule))
+    .sort((left, right) => left.multiplier - right.multiplier);
+
+  assert.equal(rules.reduce((total, rule) => total + rule.weight, 0), SLOT777_WEIGHT_TOTAL);
+  assert.equal(getSlot777TheoreticalRtpBasisPoints(), SLOT777_TARGET_RTP_BASIS_POINTS);
+
+  for (let index = 1; index < exactWins.length; index += 1) {
+    assert.ok(exactWins[index - 1]!.weight > exactWins[index]!.weight);
+  }
+});
+
 test('uses the sanitized Nginx forwarding address for request.ip', async () => {
   const { buildApp } = await import('./app.js');
   const app = buildApp();
