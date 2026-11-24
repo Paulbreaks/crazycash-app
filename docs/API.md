@@ -239,6 +239,20 @@ and `withdrawals_unavailable`.
 
 `GET /health` returns `{ "ok": true, "service": "api" }`.
 
+## Client diagnostics
+
+`POST /client-diagnostics` accepts a rate-limited, unauthenticated operational
+signal from the Shell when it starts but cannot use the browser runtime:
+
+```json
+{ "event": "game_webgl2_unavailable", "message": "WebGL 2 or WebAssembly is unavailable", "route": "/game" }
+```
+
+Allowed events are `shell_runtime_error`, `shell_unhandled_rejection` and
+`game_webgl2_unavailable`. The API writes a bounded message and user agent to
+the application log only; it does not persist the payload or associate it with
+a player session.
+
 ## Contract maintenance
 
 Public request validation is implemented in Fastify route schemas and the

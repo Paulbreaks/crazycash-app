@@ -17,6 +17,34 @@ test('rejects TON deposit amounts below 0.1 GRAM', async () => {
   assert.throws(() => parseDepositAmount('0.01'), InvalidDepositAmountError);
 });
 
+test('accepts only bounded operational client diagnostics', async () => {
+  const { buildApp } = await import('./app.js');
+  const app = buildApp();
+  await app.ready();
+
+  try {
+    const accepted = await app.inject({
+      method: 'POST',
+      url: '/client-diagnostics',
+      payload: {
+        event: 'game_webgl2_unavailable',
+        message: 'WebGL 2 or WebAssembly is unavailable',
+        route: '/game',
+      },
+    });
+    assert.equal(accepted.statusCode, 204);
+
+    const rejected = await app.inject({
+      method: 'POST',
+      url: '/client-diagnostics',
+      payload: { event: 'unknown', message: 'test', route: '/game' },
+    });
+    assert.equal(rejected.statusCode, 400);
+  } finally {
+    await app.close();
+  }
+});
+
 test('uses decreasing exact-win weights while preserving the configured RTP', async () => {
   const {
     SLOT777_TARGET_RTP_BASIS_POINTS,

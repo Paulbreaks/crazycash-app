@@ -9,6 +9,7 @@ import { authRoutes } from './modules/auth/routes.js';
 import { meRoutes } from './modules/me/routes.js';
 import { slot777Routes } from './modules/slot777/routes.js';
 import { tonRoutes } from './modules/ton/routes.js';
+import { diagnosticsRoutes } from './modules/diagnostics/routes.js';
 
 export function buildApp() {
   const app = Fastify({
@@ -60,6 +61,7 @@ export function buildApp() {
   });
 
   void healthRoutes(app);
+  void diagnosticsRoutes(app);
   void authRoutes(app);
   void meRoutes(app);
   void tonRoutes(app);

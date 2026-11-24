@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { retrieveRawInitData } from '@telegram-apps/sdk';
 import { isGameToShellMessage, type GameToShellMessage, type ShellToGameMessage } from '../bridge/messages';
 import { ApiRequestError } from '../shared/api-client';
+import { reportClientDiagnostic } from '../features/diagnostics/report';
 import {
   claimSlot777FunCredits,
   createSlot777Spin,
@@ -87,11 +88,21 @@ function isAllowedTelegramDeepLink(value: string): boolean {
   }
 }
 
+function supportsGodotWeb(): boolean {
+  try {
+    const canvas = document.createElement('canvas');
+    return canvas.getContext('webgl2') !== null && typeof WebAssembly === 'object';
+  } catch {
+    return false;
+  }
+}
+
 export function GamePage() {
   // Telegram определяется по подписанному launch context. Все остальные
   // браузеры получают desktop/mobile-вёрстку исключительно через CSS media
   // query — User-Agent и query-параметры не нужны и не влияют на права.
   const isTelegramContext = isTelegramMiniApp();
+  const isGodotWebSupported = useMemo(supportsGodotWeb, []);
   const frameRef = useRef<HTMLIFrameElement | null>(null);
   const spinRequestInFlight = useRef(false);
   const funCreditRequestInFlight = useRef(false);
@@ -647,6 +658,10 @@ export function GamePage() {
   useEffect(() => () => clearWalletActionTimeout(), []);
 
   useEffect(() => {
+    if (!isGodotWebSupported) reportClientDiagnostic('game_webgl2_unavailable', 'WebGL 2 or WebAssembly is unavailable');
+  }, [isGodotWebSupported]);
+
+  useEffect(() => {
     const tonConnectWindow = window as Window & { __crazyCashTonConnectReady?: boolean };
     tonConnectHandlerReadyRef.current = tonConnectWindow.__crazyCashTonConnectReady === true;
     const markTonConnectReady = () => {
@@ -792,6 +807,18 @@ export function GamePage() {
       cancelAllRequestsForPageHide();
     };
   }, []);
+
+  if (!isGodotWebSupported) {
+    return (
+      <main className="game-compatibility" role="alert">
+        <div className="game-compatibility__content">
+          <img src="/Logo_eng.webp" alt="Crazy Cash" />
+          <h1>GAME NOT SUPPORTED</h1>
+          <p>Update Telegram or open Crazy Cash in a modern browser with WebGL 2 enabled.</p>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main

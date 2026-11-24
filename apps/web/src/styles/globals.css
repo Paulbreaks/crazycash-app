@@ -51,6 +51,39 @@ body {
   min-height: 100dvh;
 }
 
+.game-compatibility {
+  display: grid;
+  min-height: 100dvh;
+  place-items: center;
+  padding: 1.5rem;
+  color: #edf8ff;
+  background: radial-gradient(circle at 50% 32%, #106fab 0%, #053158 34%, #021125 74%);
+  text-align: center;
+}
+
+.game-compatibility__content {
+  display: grid;
+  width: min(100%, 24rem);
+  justify-items: center;
+}
+
+.game-compatibility img {
+  width: min(82vw, 18rem);
+  height: auto;
+}
+
+.game-compatibility h1 {
+  margin: 2rem 0 0.75rem;
+  font-size: clamp(1rem, 4vw, 1.35rem);
+  letter-spacing: 0.08em;
+}
+
+.game-compatibility p {
+  margin: 0;
+  color: rgb(237 248 255 / 88%);
+  line-height: 1.5;
+}
+
 .entry-page {
   display: grid;
   min-height: 100dvh;
